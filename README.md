@@ -43,11 +43,19 @@ npx playwright install chromium
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/Users/你的用户名/Desktop/suno/skills/suno-automation-server/src/index.js"]
+      "args": ["这里填你实际的路径/src/index.js"]
     }
   }
 }
 ```
+
+**快速获取路径**：在项目目录下运行：
+
+```bash
+echo $(pwd)/src/index.js
+```
+
+把输出的路径填到 `args` 里即可。
 
 ### 3. 登录 Suno（首次）
 
@@ -71,6 +79,59 @@ npm run login
 | "帮我做一首摇滚风格的歌曲，主题是自由" | 生成摇滚风格的歌曲 |
 | "写一首纯音乐，适合做背景音乐" | 生成纯音乐（无人声） |
 | "批量生成 5 首不同风格的歌" | 自动生成多首并下载 |
+
+---
+
+## 批量生成歌曲
+
+**批量生成多首歌**：直接对 Claude 说：
+
+```
+帮我批量生成 3 首歌：
+1. 关于春天的流行歌
+2. 关于夏天的摇滚歌
+3. 关于秋天的民谣
+```
+
+或者：
+
+```
+生成 5 首不同情绪的抒情歌，主题分别是喜怒哀乐
+```
+
+Claude 会自动添加到队列、开始生成、并下载到 `downloads/` 文件夹。
+
+---
+
+## 批量生成并下载
+
+**一次性完成生成和下载**：直接对 Claude 说：
+
+```
+帮我批量生成并下载 3 首歌：
+1. 生日快乐歌，欢快流行风格
+2. 毕业纪念歌，感伤民谣风格
+3. 婚礼祝福歌，浪漫抒情风格
+```
+
+Claude 会：
+1. 自动生成每首歌曲
+2. 等待生成完成
+3. 自动下载所有歌曲到 `downloads/` 文件夹
+
+---
+
+## 所有用法组合
+
+| 用法 | 你说的话示例 | 说明 |
+|-----|-------------|------|
+| 单首生成 | "生成一首关于春天的歌" | 自动写词、选风格、生成 |
+| 单首+下载 | "生成并下载一首生日歌" | 生成后自动下载 |
+| 批量生成 | "批量生成 5 首不同风格的歌" | 自动队列生成 |
+| 批量+下载 | "批量生成并下载 3 首歌" | 批量生成后自动下载 |
+| 纯音乐 | "生成一首钢琴背景音乐" | 无歌词纯音乐 |
+| 指定风格 | "生成一首摇滚风格的歌" | 指定音乐类型 |
+| 指定人声 | "生成一首女声的抒情歌" | 男声/女声可选 |
 
 ---
 
@@ -112,7 +173,7 @@ npm run login
 打开"终端"（Mac 按 Command+空格，输入"终端"；Windows 按 Win+R，输入"cmd"），然后依次输入以下命令：
 
 ```
-cd /Users/你的用户名/Desktop/suno/skills/suno-automation-server
+cd /你clone的项目路径/suno-automation-server
 npm install
 npx playwright install chromium
 ```
@@ -460,7 +521,7 @@ Claude Code 可以直接调用以下工具：
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/Users/haobotao/Desktop/suno/skills/suno-automation-server/src/index.js"],
+      "args": ["这里填你的实际路径/src/index.js"],
       "env": {}
     }
   }
@@ -476,7 +537,7 @@ Settings → MCP Servers 或 `~/.cursor/mcp.json`:
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/Users/haobotao/Desktop/suno/skills/suno-automation-server/src/index.js"],
+      "args": ["这里填你的实际路径/src/index.js"],
       "env": {}
     }
   }
@@ -492,7 +553,7 @@ Settings → MCP Servers 或 `~/.cursor/mcp.json`:
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/Users/haobotao/Desktop/suno/skills/suno-automation-server/src/index.js"],
+      "args": ["这里填你的实际路径/src/index.js"],
       "env": {}
     }
   }
@@ -508,7 +569,7 @@ Settings → MCP Servers 或 `~/.cursor/mcp.json`:
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/Users/haobotao/Desktop/suno/skills/suno-automation-server/src/index.js"],
+      "args": ["这里填你的实际路径/src/index.js"],
       "env": {}
     }
   }
@@ -524,7 +585,7 @@ OpenClaw 使用自己的插件系统，不支持标准的 MCP 协议配置。推
 **步骤 1：启动 HTTP 服务**
 
 ```bash
-cd /Users/haobotao/Desktop/suno/skills/suno-automation-server
+cd /你clone的项目路径/suno-automation-server
 npm run start:http
 # 服务运行在 http://localhost:3456
 ```
@@ -837,7 +898,7 @@ curl -X POST http://localhost:3456/download/batch \
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/path/to/suno-automation-server/src/index.js"],
+      "args": ["你clone的项目实际路径/src/index.js"],
       "env": {},
       "disabled": false,
       "autoApprove": []

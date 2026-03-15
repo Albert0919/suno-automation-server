@@ -2,7 +2,7 @@
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["/Users/haobotao/Desktop/suno/skills/suno-automation-server/src/index.js"],
+      "args": ["在此填入你的实际路径/src/index.js（在项目目录运行 echo $(pwd)/src/index.js 获取）"],
       "env": {},
       "disabled": false,
       "autoApprove": []
