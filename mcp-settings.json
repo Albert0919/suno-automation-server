@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "suno-automation": {
+      "command": "node",
+      "args": ["/Users/haobotao/Desktop/suno/skills/suno-automation-server/src/index.js"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
