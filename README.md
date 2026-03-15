@@ -4,7 +4,94 @@
 
 ---
 
-## 🎵 给非技术用户的简易说明
+## 一句话生成歌曲
+
+**最简单的用法**：在 Claude Code 中，直接说：
+
+```
+帮我生成一首关于春天的流行歌曲
+```
+
+或者：
+
+```
+生成一首伤感抒情歌，歌词写失恋
+```
+
+Claude 会自动调用本工具，**自动生成歌曲并下载到 `downloads/` 文件夹**。
+
+这就是你需要的全部！不需要记命令，不需要懂技术。
+
+---
+
+## 快速开始（3 步）
+
+### 1. 安装
+
+```bash
+cd suno-automation-server
+npm install
+npx playwright install chromium
+```
+
+### 2. 配置 MCP（让 Claude Code 能调用）
+
+把下面内容加到 `~/.claude/settings.json` 或项目根目录的 `.mcp.json`：
+
+```json
+{
+  "mcpServers": {
+    "suno-automation": {
+      "command": "node",
+      "args": ["/Users/你的用户名/Desktop/suno/skills/suno-automation-server/src/index.js"]
+    }
+  }
+}
+```
+
+### 3. 登录 Suno（首次）
+
+```bash
+npm run login
+```
+
+浏览器会打开，手动登录 Suno。登录状态会自动保存。
+
+**完成！** 现在直接对 Claude 说你想生成什么歌就行了。
+
+---
+
+## 使用示例
+
+直接对 Claude 说：
+
+| 你说的话 | Claude 会做什么 |
+|---------|---------------|
+| "生成一首生日快乐歌" | 自动写歌词、选风格、生成并下载 |
+| "帮我做一首摇滚风格的歌曲，主题是自由" | 生成摇滚风格的歌曲 |
+| "写一首纯音乐，适合做背景音乐" | 生成纯音乐（无人声） |
+| "批量生成 5 首不同风格的歌" | 自动生成多首并下载 |
+
+---
+
+## 常用音乐风格
+
+直接说中文风格也行，Claude 会自动转换：
+
+| 中文 | 英文 |
+|-----|------|
+| 流行/欢快 | pop, upbeat |
+| 抒情/慢歌 | ballad, emotional, piano |
+| 摇滚 | rock, energetic |
+| 爵士 | jazz, smooth |
+| 民谣 | folk, acoustic |
+| 说唱 | hip hop, rap |
+| 电子 | electronic, synth |
+| 古风 | chinese traditional, guzheng |
+
+---
+
+## 给非技术用户的详细说明
 
 ### 这个工具是什么？
 
