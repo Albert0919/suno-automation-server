@@ -1,37 +1,34 @@
 # Suno Automation Server
 
-[![English](https://img.shields.io/badge/English-English-blue?style=flat-square)](README.md)
-[![中文](https://img.shields.io/badge/中文-Chinese-red?style=flat-square)](README_CN.md)
-[![日本語](https://img.shields.io/badge/日本語-Japanese-green?style=flat-square)](README_JA.md)
-[![한국어](https://img.shields.io/badge/한국어-Korean-yellow?style=flat-square)](README_KO.md)
+[English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md) | [한국어](README_KO.md)
 
-本地自动化服务，用于 Suno AI 音乐生成。支持 MCP 和 HTTP API 两种模式。
+A local automation service for Suno AI music generation. Supports both MCP and HTTP API modes.
 
 ---
 
-## 一句话生成歌曲
+## Generate Songs with One Sentence
 
-**最简单的用法**：在 Claude Code 中，直接说：
-
-```
-帮我生成一首关于春天的流行歌曲
-```
-
-或者：
+**Simplest usage**: In Claude Code, just say:
 
 ```
-生成一首伤感抒情歌，歌词写失恋
+Help me generate a pop song about spring
 ```
 
-Claude 会自动调用本工具，**自动生成歌曲并下载到 `downloads/` 文件夹**。
+Or:
 
-这就是你需要的全部！不需要记命令，不需要懂技术。
+```
+Generate a sad ballad about heartbreak
+```
+
+Claude will automatically call this tool, **generate the song and download it to the `downloads/` folder**.
+
+That's all you need! No commands to memorize, no technical knowledge required.
 
 ---
 
-## 快速开始（3 步）
+## Quick Start (3 Steps)
 
-### 1. 安装
+### 1. Install
 
 ```bash
 cd suno-automation-server
@@ -39,112 +36,112 @@ npm install
 npx playwright install chromium
 ```
 
-### 2. 配置 MCP（让 Claude Code 能调用）
+### 2. Configure MCP (Enable Claude Code Integration)
 
-把下面内容加到 `~/.claude/settings.json` 或项目根目录的 `.mcp.json`：
+Add the following to `~/.claude/settings.json` or `.mcp.json` in your project root:
 
 ```json
 {
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["这里填你实际的路径/src/index.js"]
+      "args": ["your-actual-path/src/index.js"]
     }
   }
 }
 ```
 
-**快速获取路径**：在项目目录下运行：
+**Quick path retrieval**: Run in the project directory:
 
 ```bash
 echo $(pwd)/src/index.js
 ```
 
-把输出的路径填到 `args` 里即可。
+Copy the output path to `args`.
 
-### 3. 登录 Suno（首次）
+### 3. Login to Suno (First Time)
 
 ```bash
 npm run login
 ```
 
-浏览器会打开，手动登录 Suno。登录状态会自动保存。
+A browser will open for you to manually login to Suno. The login state will be automatically saved.
 
-**完成！** 现在直接对 Claude 说你想生成什么歌就行了。
+**Done!** Now just tell Claude what song you want to generate.
 
 ---
 
-## 使用示例
+## Usage Examples
 
-直接对 Claude 说：
+Just tell Claude directly:
 
-| 你说的话 | Claude 会做什么 |
+| What You Say | What Claude Does |
 |---------|---------------|
-| "生成一首生日快乐歌" | 自动写歌词、选风格、生成并下载 |
-| "帮我做一首摇滚风格的歌曲，主题是自由" | 生成摇滚风格的歌曲 |
-| "写一首纯音乐，适合做背景音乐" | 生成纯音乐（无人声） |
-| "批量生成 5 首不同风格的歌" | 自动生成多首并下载 |
+| "Generate a birthday song" | Automatically writes lyrics, picks style, generates and downloads |
+| "Make a rock song about freedom" | Generates a rock style song |
+| "Write an instrumental piece for background music" | Generates instrumental music (no vocals) |
+| "Batch generate 5 songs in different styles" | Automatically generates multiple songs and downloads |
 
 ---
 
-## 批量生成歌曲
+## Batch Generate Songs
 
-**批量生成多首歌**：直接对 Claude 说：
-
-```
-帮我批量生成 3 首歌：
-1. 关于春天的流行歌
-2. 关于夏天的摇滚歌
-3. 关于秋天的民谣
-```
-
-或者：
+**Generate multiple songs**: Just tell Claude:
 
 ```
-生成 5 首不同情绪的抒情歌，主题分别是喜怒哀乐
+Help me batch generate 3 songs:
+1. A pop song about spring
+2. A rock song about summer
+3. A folk song about autumn
 ```
 
-Claude 会自动添加到队列、开始生成、并下载到 `downloads/` 文件夹。
+Or:
+
+```
+Generate 5 ballads with different emotions: joy, anger, sadness, and happiness
+```
+
+Claude will automatically add to queue, start generation, and download to `downloads/` folder.
 
 ---
 
-## 批量生成并下载
+## Batch Generate and Download
 
-**一次性完成生成和下载**：直接对 Claude 说：
+**Complete generation and download in one go**: Just tell Claude:
 
 ```
-帮我批量生成并下载 3 首歌：
-1. 生日快乐歌，欢快流行风格
-2. 毕业纪念歌，感伤民谣风格
-3. 婚礼祝福歌，浪漫抒情风格
+Help me batch generate and download 3 songs:
+1. Birthday song, upbeat pop style
+2. Graduation song, sentimental folk style
+3. Wedding blessing song, romantic ballad style
 ```
 
-Claude 会：
-1. 自动生成每首歌曲
-2. 等待生成完成
-3. 自动下载所有歌曲到 `downloads/` 文件夹
+Claude will:
+1. Automatically generate each song
+2. Wait for generation to complete
+3. Automatically download all songs to `downloads/` folder
 
 ---
 
-## 所有用法组合
+## All Usage Combinations
 
-| 用法 | 你说的话示例 | 说明 |
+| Usage | Example | Description |
 |-----|-------------|------|
-| 单首生成 | "生成一首关于春天的歌" | 自动写词、选风格、生成 |
-| 单首+下载 | "生成并下载一首生日歌" | 生成后自动下载 |
-| 批量生成 | "批量生成 5 首不同风格的歌" | 自动队列生成 |
-| 批量+下载 | "批量生成并下载 3 首歌" | 批量生成后自动下载 |
-| 纯音乐 | "生成一首钢琴背景音乐" | 无歌词纯音乐 |
-| 指定风格 | "生成一首摇滚风格的歌" | 指定音乐类型 |
-| 指定人声 | "生成一首女声的抒情歌" | 男声/女声可选 |
+| Single generation | "Generate a song about spring" | Auto write lyrics, pick style, generate |
+| Single + download | "Generate and download a birthday song" | Auto download after generation |
+| Batch generation | "Batch generate 5 songs in different styles" | Auto queue generation |
+| Batch + download | "Batch generate and download 3 songs" | Auto download after batch generation |
+| Instrumental | "Generate a piano background music" | No lyrics instrumental |
+| Specify style | "Generate a rock song" | Specify music genre |
+| Specify vocals | "Generate a female vocal ballad" | Male/female voice optional |
 
 ---
 
-## 常用音乐风格
+## Common Music Styles
 
-直接说中文风格也行，Claude 会自动转换：
+You can say styles in Chinese, Claude will automatically convert:
 
-| 中文 | 英文 |
+| Chinese | English |
 |-----|------|
 | 流行/欢快 | pop, upbeat |
 | 抒情/慢歌 | ballad, emotional, piano |
@@ -157,206 +154,61 @@ Claude 会：
 
 ---
 
-## 给非技术用户的详细说明
-
-### 这个工具是什么？
-
-这是一个帮助你**自动生成 AI 音乐**的小工具。它可以：
-- 🎤 自动帮你填写歌词、选择音乐风格
-- 🎼 一键生成歌曲
-- 📥 自动下载生成的音乐文件
-- 🔄 批量生成多首歌曲（比如一次性生成 10 首）
-
-### 你需要准备什么？
-
-1. **一台电脑**（Mac 或 Windows 都可以）
-2. **安装 Node.js**（这是一个免费软件，去 nodejs.org 下载安装即可）
-3. **一个 Suno 账号**（去 suno.com 注册，免费账号每月有 50 首歌的额度）
-
-### 第一步：安装软件
-
-打开"终端"（Mac 按 Command+空格，输入"终端"；Windows 按 Win+R，输入"cmd"），然后依次输入以下命令：
-
-```
-cd /你clone的项目路径/suno-automation-server
-npm install
-npx playwright install chromium
-```
-
-等待安装完成，可能需要几分钟。
-
-### 第二步：登录 Suno 账号
-
-在终端输入：
-
-```
-npm run login
-```
-
-这会自动打开浏览器，你手动登录你的 Suno 账号。登录成功后，关闭浏览器即可。以后都不用再登录了。
-
-### 第三步：启动服务
-
-在终端输入：
-
-```
-npm run start:http
-```
-
-看到 "Server running at http://127.0.0.1:3456" 就说明启动成功了。
-
-**注意**：这个终端窗口要保持开着，不要关闭。
-
-### 第四步：生成你的第一首歌
-
-打开另一个终端窗口（或标签页），输入下面的命令来生成歌曲：
-
-```
-curl -X POST http://localhost:3456/generate \
-  -H "Content-Type: application/json" \
-  -d '{"lyrics": "[Verse]\n今天天气真好\n阳光明媚\n[Chorus]\n我们一起唱歌吧", "style": "pop, happy, upbeat", "title": "快乐的一天"}'
-```
-
-等待大约 1-2 分钟，歌曲就会自动生成！
-
-### 命令解释（看不懂没关系，照抄就行）
-
-上面的命令里：
-- `"lyrics"` 后面是歌词，`\n` 表示换行，`[Verse]` 和 `[Chorus]` 是歌曲结构标记
-- `"style"` 后面是音乐风格，用英文逗号分隔，比如 `pop` 流行、`rock` 摇滚、`jazz` 爵士
-- `"title"` 后面是歌曲名称
-
-### 常用音乐风格参考
-
-| 中文风格 | 英文写法 |
-|---------|---------|
-| 流行 | pop |
-| 抒情/慢歌 | ballad |
-| 摇滚 | rock |
-| 爵士 | jazz |
-| 电子 | electronic |
-| 民谣 | folk |
-| 说唱 | hip hop, rap |
-| 古风 | chinese traditional, guzheng |
-| 钢琴伴奏 | piano, acoustic |
-| 欢快 | upbeat, happy |
-| 伤感 | sad, emotional |
-
-### 批量生成多首歌曲
-
-如果你有很多歌词想生成，可以用批量功能：
-
-**第一步**：准备一个文本文件，按下面的格式写好所有歌曲：
-
-```
-[
-  {"lyrics": "[Verse]\n第一首歌的歌词", "title": "歌名一"},
-  {"lyrics": "[Verse]\n第二首歌的歌词", "title": "歌名二"},
-  {"lyrics": "[Verse]\n第三首歌的歌词", "title": "歌名三"}
-]
-```
-
-**第二步**：添加到队列：
-
-```
-curl -X POST http://localhost:3456/batch/add \
-  -H "Content-Type: application/json" \
-  -d '{"items": [{"lyrics": "[Verse]\n第一首歌歌词", "title": "歌一"}, {"lyrics": "[Verse]\n第二首歌歌词", "title": "歌二"}], "defaults": {"style": "pop, ballad"}}'
-```
-
-**第三步**：开始生成：
-
-```
-curl -X POST http://localhost:3456/batch/start
-```
-
-系统会自动一首一首生成，每首之间间隔约 60 秒。
-
-### 下载生成的歌曲
-
-歌曲生成后，你需要知道歌曲的 UUID（一个唯一的编号）才能下载。你可以在 Suno 网站的歌曲页面 URL 中找到它。
-
-下载命令：
-
-```
-curl -X POST http://localhost:3456/download \
-  -H "Content-Type: application/json" \
-  -d '{"uuid": "你的歌曲UUID", "title": "歌曲名称"}'
-```
-
-下载的文件会保存在 `downloads` 文件夹里。
-
-### 常见问题
-
-**Q: 提示"端口被占用"怎么办？**
-A: 说明服务已经在运行了，不需要再启动。直接用就行。
-
-**Q: 生成失败怎么办？**
-A: 检查一下是否登录了 Suno 账号，再检查一下账号是否有剩余额度。
-
-**Q: 歌词里的特殊符号怎么写？**
-A: 换行用 `\n`，双引号用 `\"`，其他符号正常写就行。
-
-**Q: 可以生成纯音乐吗？**
-A: 可以！在命令里加上 `"instrumental": true` 就行。
-
----
-
-## 安装（技术用户）
+## Installation (Technical Users)
 
 ```bash
 cd suno-automation-server
 npm install
-npx playwright install chromium  # 首次需要安装浏览器
+npx playwright install chromium  # First time requires browser installation
 ```
 
-## 使用
+## Usage
 
-### 1. 首次登录
+### 1. First Login
 
 ```bash
 npm run login
-# 或
+# or
 node src/index.js --login
 ```
 
-会打开浏览器，手动登录 Suno。登录状态会自动保存到 `browser-data/` 目录。
+Opens browser for manual Suno login. Login state is saved to `browser-data/` directory.
 
-### 2. 启动服务
+### 2. Start Service
 
-**MCP 模式（默认，用于 Claude Code）：**
+**MCP Mode (Default, for Claude Code):**
 
 ```bash
 npm start
-# 或
+# or
 node src/index.js --mcp
 ```
 
-**HTTP 模式（通用 API）：**
+**HTTP Mode (General API):**
 
 ```bash
 npm run start:http
-# 或
+# or
 node src/index.js --http
 ```
 
-服务运行在 `http://localhost:3456`
+Service runs at `http://localhost:3456`
 
 ## API
 
 ### HTTP API
 
-#### 单首歌曲
+#### Single Song
 
-| 端点 | 方法 | 说明 |
+| Endpoint | Method | Description |
 |------|------|------|
-| `/generate` | POST | 生成歌曲 |
-| `/status` | GET | 检查状态 |
-| `/login` | POST | 打开登录页面 |
-| `/close` | POST | 关闭浏览器 |
-| `/health` | GET | 健康检查 |
+| `/generate` | POST | Generate song |
+| `/status` | GET | Check status |
+| `/login` | POST | Open login page |
+| `/close` | POST | Close browser |
+| `/health` | GET | Health check |
 
-**生成歌曲示例：**
+**Generate Song Example:**
 
 ```bash
 curl -X POST http://localhost:3456/generate \
@@ -369,20 +221,20 @@ curl -X POST http://localhost:3456/generate \
   }'
 ```
 
-#### 批量生成
+#### Batch Generation
 
-| 端点 | 方法 | 说明 |
+| Endpoint | Method | Description |
 |------|------|------|
-| `/batch/add` | POST | 添加歌曲到队列 |
-| `/batch/status` | GET | 获取队列状态 |
-| `/batch/start` | POST | 开始批量处理 |
-| `/batch/stop` | POST | 停止批量处理 |
-| `/batch/clear` | POST | 清空队列 |
+| `/batch/add` | POST | Add songs to queue |
+| `/batch/status` | GET | Get queue status |
+| `/batch/start` | POST | Start batch processing |
+| `/batch/stop` | POST | Stop batch processing |
+| `/batch/clear` | POST | Clear queue |
 
-**批量生成示例：**
+**Batch Generation Example:**
 
 ```bash
-# 1. 添加歌曲到队列
+# 1. Add songs to queue
 curl -X POST http://localhost:3456/batch/add \
   -H "Content-Type: application/json" \
   -d '{
@@ -400,34 +252,34 @@ curl -X POST http://localhost:3456/batch/add \
     ]
   }'
 
-# 2. 开始批量处理（可选指定延迟秒数）
+# 2. Start batch processing (optionally specify delay seconds)
 curl -X POST http://localhost:3456/batch/start \
   -H "Content-Type: application/json" \
   -d '{ "delaySeconds": 60 }'
 
-# 3. 查看状态
+# 3. Check status
 curl http://localhost:3456/batch/status
 
-# 4. 停止（可选）
+# 4. Stop (optional)
 curl -X POST http://localhost:3456/batch/stop
 
-# 5. 清空队列（可选）
+# 5. Clear queue (optional)
 curl -X POST http://localhost:3456/batch/clear
 ```
 
-#### 下载歌曲
+#### Download Songs
 
-| 端点 | 方法 | 说明 |
+| Endpoint | Method | Description |
 |------|------|------|
-| `/download` | POST | 下载单首歌曲（通过UUID） |
-| `/download/batch` | POST | 批量下载多首歌曲 |
-| `/download/queue/add` | POST | 添加到下载队列 |
-| `/download/queue/status` | GET | 获取下载队列状态 |
-| `/download/queue/start` | POST | 开始下载队列处理 |
-| `/download/queue/stop` | POST | 停止下载队列处理 |
-| `/download/queue/clear` | POST | 清空下载队列 |
+| `/download` | POST | Download single song (by UUID) |
+| `/download/batch` | POST | Batch download multiple songs |
+| `/download/queue/add` | POST | Add to download queue |
+| `/download/queue/status` | GET | Get download queue status |
+| `/download/queue/start` | POST | Start download queue processing |
+| `/download/queue/stop` | POST | Stop download queue processing |
+| `/download/queue/clear` | POST | Clear download queue |
 
-**下载单首歌曲：**
+**Download Single Song:**
 
 ```bash
 curl -X POST http://localhost:3456/download \
@@ -440,7 +292,7 @@ curl -X POST http://localhost:3456/download \
   }'
 ```
 
-**批量下载：**
+**Batch Download:**
 
 ```bash
 curl -X POST http://localhost:3456/download/batch \
@@ -455,10 +307,10 @@ curl -X POST http://localhost:3456/download/batch \
   }'
 ```
 
-**使用下载队列：**
+**Using Download Queue:**
 
 ```bash
-# 1. 添加到下载队列
+# 1. Add to download queue
 curl -X POST http://localhost:3456/download/queue/add \
   -H "Content-Type: application/json" \
   -d '{
@@ -469,52 +321,52 @@ curl -X POST http://localhost:3456/download/queue/add \
     "format": "mp3"
   }'
 
-# 2. 开始下载
+# 2. Start download
 curl -X POST http://localhost:3456/download/queue/start \
   -H "Content-Type: application/json" \
   -d '{ "concurrency": 3 }'
 
-# 3. 查看状态
+# 3. Check status
 curl http://localhost:3456/download/queue/status
 ```
 
 ### MCP Tools
 
-Claude Code 可以直接调用以下工具：
+Claude Code can directly call the following tools:
 
-#### 单首歌曲
-- `suno_generate` - 生成歌曲（传入歌词、风格、标题）
-- `suno_status` - 检查当前状态
-- `suno_login` - 打开登录页面
+#### Single Song
+- `suno_generate` - Generate song (pass lyrics, style, title)
+- `suno_status` - Check current status
+- `suno_login` - Open login page
 
-#### 批量生成
-- `suno_batch_add` - 添加多首歌曲到队列
-- `suno_batch_status` - 获取队列状态
-- `suno_batch_start` - 开始批量处理（可指定延迟秒数）
-- `suno_batch_stop` - 停止批量处理
-- `suno_batch_clear` - 清空队列
+#### Batch Generation
+- `suno_batch_add` - Add multiple songs to queue
+- `suno_batch_status` - Get queue status
+- `suno_batch_start` - Start batch processing (can specify delay seconds)
+- `suno_batch_stop` - Stop batch processing
+- `suno_batch_clear` - Clear queue
 
-#### 下载歌曲
-- `suno_download` - 下载单首歌曲（通过UUID）
-- `suno_download_batch` - 批量下载多首歌曲
-- `suno_download_queue_add` - 添加到下载队列
-- `suno_download_queue_status` - 获取下载队列状态
-- `suno_download_queue_start` - 开始下载队列处理
-- `suno_download_queue_stop` - 停止下载队列处理
-- `suno_download_queue_clear` - 清空下载队列
+#### Download Songs
+- `suno_download` - Download single song (by UUID)
+- `suno_download_batch` - Batch download multiple songs
+- `suno_download_queue_add` - Add to download queue
+- `suno_download_queue_status` - Get download queue status
+- `suno_download_queue_start` - Start download queue processing
+- `suno_download_queue_stop` - Stop download queue processing
+- `suno_download_queue_clear` - Clear download queue
 
-## 配置
+## Configuration
 
-编辑 `config.js` 修改：
+Edit `config.js` to modify:
 
-- 端口号（默认 3456）
-- 浏览器设置
-- 超时时间
-- 批量延迟（默认 60 秒）
+- Port number (default 3456)
+- Browser settings
+- Timeout duration
+- Batch delay (default 60 seconds)
 
-## MCP 客户端配置
+## MCP Client Configuration
 
-兼容 Claude Desktop、Cursor、Windsurf、OpenAI Codex CLI 等 MCP 客户端。
+Compatible with Claude Desktop, Cursor, Windsurf, OpenAI Codex CLI and other MCP clients.
 
 ### Claude Desktop
 
@@ -526,7 +378,7 @@ Claude Code 可以直接调用以下工具：
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["这里填你的实际路径/src/index.js"],
+      "args": ["your-actual-path/src/index.js"],
       "env": {}
     }
   }
@@ -535,14 +387,14 @@ Claude Code 可以直接调用以下工具：
 
 ### Cursor
 
-Settings → MCP Servers 或 `~/.cursor/mcp.json`:
+Settings → MCP Servers or `~/.cursor/mcp.json`:
 
 ```json
 {
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["这里填你的实际路径/src/index.js"],
+      "args": ["your-actual-path/src/index.js"],
       "env": {}
     }
   }
@@ -558,7 +410,7 @@ Settings → MCP Servers 或 `~/.cursor/mcp.json`:
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["这里填你的实际路径/src/index.js"],
+      "args": ["your-actual-path/src/index.js"],
       "env": {}
     }
   }
@@ -574,7 +426,7 @@ Settings → MCP Servers 或 `~/.cursor/mcp.json`:
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["这里填你的实际路径/src/index.js"],
+      "args": ["your-actual-path/src/index.js"],
       "env": {}
     }
   }
@@ -583,34 +435,34 @@ Settings → MCP Servers 或 `~/.cursor/mcp.json`:
 
 ### OpenClaw
 
-OpenClaw 使用自己的插件系统，不支持标准的 MCP 协议配置。推荐使用 **HTTP API 模式** 进行集成。
+OpenClaw uses its own plugin system and doesn't support standard MCP protocol configuration. Recommended to use **HTTP API mode** for integration.
 
-#### 快速开始
+#### Quick Start
 
-**步骤 1：启动 HTTP 服务**
+**Step 1: Start HTTP Service**
 
 ```bash
-cd /你clone的项目路径/suno-automation-server
+cd /your-cloned-project-path/suno-automation-server
 npm run start:http
-# 服务运行在 http://localhost:3456
+# Service runs at http://localhost:3456
 ```
 
-**步骤 2：首次登录 Suno**
+**Step 2: First Suno Login**
 
 ```bash
-# 打开浏览器进行登录
+# Open browser for login
 curl -X POST http://localhost:3456/login
 ```
 
-在弹出的浏览器中完成 Suno 登录，登录状态会自动保存。
+Complete Suno login in the browser, login state will be automatically saved.
 
-**步骤 3：验证服务状态**
+**Step 3: Verify Service Status**
 
 ```bash
 curl http://localhost:3456/status
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "success": true,
@@ -622,61 +474,61 @@ curl http://localhost:3456/status
 }
 ```
 
-#### API 详细说明
+#### API Details
 
-##### 1. 生成歌曲
+##### 1. Generate Song
 
-**端点**: `POST /generate`
+**Endpoint**: `POST /generate`
 
-| 参数 | 类型 | 必填 | 说明 |
+| Parameter | Type | Required | Description |
 |------|------|------|------|
-| lyrics | string | 是 | 歌词内容，支持结构标记 `[Verse]`、`[Chorus]` 等 |
-| style | string | 是 | 音乐风格，多个用逗号分隔，如 `pop, upbeat, electronic` |
-| title | string | 否 | 歌曲标题 |
-| autoCreate | boolean | 否 | 是否自动点击创建按钮，默认 `true` |
-| gender | string | 否 | 人声性别：`male` 或 `female` |
-| styleInfluence | number | 否 | 风格影响力 0-100，默认 50 |
-| weirdness | number | 否 | 创意度 0-100，默认 50 |
-| instrumental | boolean | 否 | 是否为纯音乐，默认 `false` |
+| lyrics | string | yes | Lyrics content, supports structure markers `[Verse]`, `[Chorus]` etc. |
+| style | string | yes | Music style, multiple separated by commas, e.g. `pop, upbeat, electronic` |
+| title | string | no | Song title |
+| autoCreate | boolean | no | Whether to auto-click create button, default `true` |
+| gender | string | no | Vocal gender: `male` or `female` |
+| styleInfluence | number | no | Style influence 0-100, default 50 |
+| weirdness | number | no | Creativity level 0-100, default 50 |
+| instrumental | boolean | no | Whether instrumental only, default `false` |
 
 ```bash
 curl -X POST http://localhost:3456/generate \
   -H "Content-Type: application/json" \
   -d '{
-    "lyrics": "[Verse]\n夜空中最亮的星\n能否听清\n[Chorus]\n我祈祷拥有一颗透明的心灵",
+    "lyrics": "[Verse]\nBrightest star in the night sky\nCan you hear me\n[Chorus]\nI pray for a transparent heart",
     "style": "pop, ballad, emotional, piano",
-    "title": "夜空中最亮的星",
+    "title": "Brightest Star",
     "gender": "male",
     "autoCreate": true
   }'
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "success": true,
   "message": "Song generation started",
   "data": {
-    "title": "夜空中最亮的星",
+    "title": "Brightest Star",
     "style": "pop, ballad, emotional, piano"
   }
 }
 ```
 
-##### 2. 批量生成歌曲
+##### 2. Batch Generate Songs
 
-适用于一次生成多首歌曲，支持共享默认配置。
+Suitable for generating multiple songs at once, supports shared default configuration.
 
-**添加到队列**: `POST /batch/add`
+**Add to Queue**: `POST /batch/add`
 
 ```bash
 curl -X POST http://localhost:3456/batch/add \
   -H "Content-Type: application/json" \
   -d '{
     "items": [
-      { "lyrics": "[Verse]\n第一首歌歌词", "title": "歌曲一" },
-      { "lyrics": "[Verse]\n第二首歌歌词", "title": "歌曲二" },
-      { "lyrics": "[Verse]\n第三首歌歌词", "title": "歌曲三", "style": "jazz, smooth" }
+      { "lyrics": "[Verse]\nFirst song lyrics", "title": "Song One" },
+      { "lyrics": "[Verse]\nSecond song lyrics", "title": "Song Two" },
+      { "lyrics": "[Verse]\nThird song lyrics", "title": "Song Three", "style": "jazz, smooth" }
     ],
     "defaults": {
       "style": "pop, upbeat",
@@ -686,18 +538,18 @@ curl -X POST http://localhost:3456/batch/add \
   }'
 ```
 
-| 参数 | 说明 |
+| Parameter | Description |
 |------|------|
-| items | 歌曲数组，每项需包含 `lyrics`（必填），可选 `title`、`style`（覆盖默认值） |
-| defaults | 共享默认配置，所有歌曲都会使用，除非单独覆盖 |
+| items | Song array, each item requires `lyrics` (required), optional `title`, `style` (overrides default) |
+| defaults | Shared default config, all songs will use unless individually overridden |
 
-**查看队列状态**: `GET /batch/status`
+**View Queue Status**: `GET /batch/status`
 
 ```bash
 curl http://localhost:3456/batch/status
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "success": true,
@@ -707,12 +559,12 @@ curl http://localhost:3456/batch/status
   "total": 3,
   "running": true,
   "results": [
-    { "title": "歌曲一", "success": true, "uuid": "xxx-xxx-xxx" }
+    { "title": "Song One", "success": true, "uuid": "xxx-xxx-xxx" }
   ]
 }
 ```
 
-**开始批量处理**: `POST /batch/start`
+**Start Batch Processing**: `POST /batch/start`
 
 ```bash
 curl -X POST http://localhost:3456/batch/start \
@@ -720,35 +572,35 @@ curl -X POST http://localhost:3456/batch/start \
   -d '{ "delaySeconds": 90 }'
 ```
 
-| 参数 | 说明 |
+| Parameter | Description |
 |------|------|
-| delaySeconds | 每首歌之间的间隔秒数，默认 60，范围 5-300 |
+| delaySeconds | Interval seconds between songs, default 60, range 5-300 |
 
-**停止批量处理**: `POST /batch/stop`
+**Stop Batch Processing**: `POST /batch/stop`
 
 ```bash
 curl -X POST http://localhost:3456/batch/stop
 ```
 
-**清空队列**: `POST /batch/clear`
+**Clear Queue**: `POST /batch/clear`
 
 ```bash
 curl -X POST http://localhost:3456/batch/clear
 ```
 
-##### 3. 下载歌曲
+##### 3. Download Songs
 
-生成完成后，可通过 UUID 下载歌曲。
+After generation completes, you can download songs via UUID.
 
-**下载单首歌曲**: `POST /download`
+**Download Single Song**: `POST /download`
 
-| 参数 | 类型 | 必填 | 说明 |
+| Parameter | Type | Required | Description |
 |------|------|------|------|
-| uuid | string | 是 | 歌曲 UUID（从生成结果或 Suno 页面获取） |
-| format | string | 否 | 音频格式：`mp3`（免费）或 `wav`（需会员），默认 `mp3` |
-| title | string | 否 | 文件名标题 |
-| outputDir | string | 否 | 输出目录，默认 `downloads/` |
-| includeImage | boolean | 否 | 是否同时下载封面图，默认 `false` |
+| uuid | string | yes | Song UUID (get from generation result or Suno page) |
+| format | string | no | Audio format: `mp3` (free) or `wav` (requires subscription), default `mp3` |
+| title | string | no | Filename title |
+| outputDir | string | no | Output directory, default `downloads/` |
+| includeImage | boolean | no | Whether to also download cover image, default `false` |
 
 ```bash
 curl -X POST http://localhost:3456/download \
@@ -756,92 +608,92 @@ curl -X POST http://localhost:3456/download \
   -d '{
     "uuid": "abc123-def456-ghi789",
     "format": "mp3",
-    "title": "我的歌曲",
+    "title": "My Song",
     "includeImage": true
   }'
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "success": true,
-  "file": "/path/to/downloads/我的歌曲.mp3",
-  "image": "/path/to/downloads/我的歌曲.png"
+  "file": "/path/to/downloads/My Song.mp3",
+  "image": "/path/to/downloads/My Song.png"
 }
 ```
 
-**批量下载**: `POST /download/batch`
+**Batch Download**: `POST /download/batch`
 
 ```bash
 curl -X POST http://localhost:3456/download/batch \
   -H "Content-Type: application/json" \
   -d '{
     "items": [
-      { "uuid": "uuid-1", "title": "歌曲A" },
-      { "uuid": "uuid-2", "title": "歌曲B" }
+      { "uuid": "uuid-1", "title": "Song A" },
+      { "uuid": "uuid-2", "title": "Song B" }
     ],
     "format": "mp3",
     "concurrency": 3
   }'
 ```
 
-| 参数 | 说明 |
+| Parameter | Description |
 |------|------|
-| items | 歌曲 UUID 数组，每项需包含 `uuid`，可选 `title` |
-| concurrency | 并发下载数，默认 3，最大 10 |
+| items | Song UUID array, each item requires `uuid`, optional `title` |
+| concurrency | Concurrent downloads, default 3, max 10 |
 
-**使用下载队列**（后台处理大批量下载）：
+**Using Download Queue** (background processing for large batch downloads):
 
 ```bash
-# 1. 添加到下载队列
+# 1. Add to download queue
 curl -X POST http://localhost:3456/download/queue/add \
   -H "Content-Type: application/json" \
   -d '{
     "items": [
-      { "uuid": "uuid-1", "title": "歌曲A" },
-      { "uuid": "uuid-2", "title": "歌曲B" }
+      { "uuid": "uuid-1", "title": "Song A" },
+      { "uuid": "uuid-2", "title": "Song B" }
     ],
     "format": "mp3"
   }'
 
-# 2. 开始下载
+# 2. Start download
 curl -X POST http://localhost:3456/download/queue/start \
   -H "Content-Type: application/json" \
   -d '{ "concurrency": 3 }'
 
-# 3. 查看下载进度
+# 3. Check download progress
 curl http://localhost:3456/download/queue/status
 
-# 4. 停止下载
+# 4. Stop download
 curl -X POST http://localhost:3456/download/queue/stop
 ```
 
-##### 4. 其他端点
+##### 4. Other Endpoints
 
-| 端点 | 方法 | 说明 |
+| Endpoint | Method | Description |
 |------|------|------|
-| `/health` | GET | 健康检查 |
-| `/status` | GET | 查看登录状态和服务状态 |
-| `/login` | POST | 打开登录页面 |
-| `/close` | POST | 关闭浏览器 |
+| `/health` | GET | Health check |
+| `/status` | GET | View login status and service status |
+| `/login` | POST | Open login page |
+| `/close` | POST | Close browser |
 
-#### 完整工作流程示例
+#### Complete Workflow Example
 
 ```bash
-# 1. 启动服务
+# 1. Start service
 npm run start:http
 
-# 2. 首次登录（如已登录可跳过）
+# 2. First login (skip if already logged in)
 curl -X POST http://localhost:3456/login
 
-# 3. 批量添加歌曲
+# 3. Batch add songs
 curl -X POST http://localhost:3456/batch/add \
   -H "Content-Type: application/json" \
   -d '{
     "items": [
-      { "lyrics": "[Verse]\n春风吹过山岗\n花儿竞相开放", "title": "春风" },
-      { "lyrics": "[Verse]\n夏天的海边\n阳光洒满沙滩", "title": "夏日" },
-      { "lyrics": "[Verse]\n秋叶随风飘落\n金黄铺满小路", "title": "秋叶" }
+      { "lyrics": "[Verse]\nSpring breeze blows over the hills\nFlowers bloom everywhere", "title": "Spring Breeze" },
+      { "lyrics": "[Verse]\nSummer beach\nSunlight on the sand", "title": "Summer Days" },
+      { "lyrics": "[Verse]\nAutumn leaves fall with wind\nGold covers the path", "title": "Autumn Leaves" }
     ],
     "defaults": {
       "style": "pop, acoustic, guitar",
@@ -849,61 +701,61 @@ curl -X POST http://localhost:3456/batch/add \
     }
   }'
 
-# 4. 开始批量生成（每首间隔 90 秒）
+# 4. Start batch generation (90 seconds between each)
 curl -X POST http://localhost:3456/batch/start \
   -H "Content-Type: application/json" \
   -d '{ "delaySeconds": 90 }'
 
-# 5. 查看进度
+# 5. Check progress
 curl http://localhost:3456/batch/status
 
-# 6. 生成完成后下载歌曲（使用返回的 UUID）
+# 6. Download songs after generation completes (use returned UUIDs)
 curl -X POST http://localhost:3456/download/batch \
   -H "Content-Type: application/json" \
   -d '{
     "items": [
-      { "uuid": "生成的uuid-1", "title": "春风" },
-      { "uuid": "生成的uuid-2", "title": "夏日" },
-      { "uuid": "生成的uuid-3", "title": "秋叶" }
+      { "uuid": "generated-uuid-1", "title": "Spring Breeze" },
+      { "uuid": "generated-uuid-2", "title": "Summer Days" },
+      { "uuid": "generated-uuid-3", "title": "Autumn Leaves" }
     ],
     "format": "mp3",
     "includeImage": true
   }'
 ```
 
-#### 常见风格参考
+#### Common Style Reference
 
-| 风格组合 | 适用场景 |
+| Style Combination | Use Case |
 |---------|---------|
-| `pop, upbeat, electronic` | 流行舞曲 |
-| `ballad, emotional, piano` | 抒情慢歌 |
-| `rock, energetic, electric guitar` | 摇滚 |
-| `jazz, smooth, saxophone` | 爵士 |
-| `folk, acoustic, guitar` | 民谣 |
-| `hip hop, rap, beat` | 说唱 |
-| `classical, orchestral, strings` | 古典管弦 |
-| `electronic, synth, ambient` | 电子氛围 |
+| `pop, upbeat, electronic` | Pop dance |
+| `ballad, emotional, piano` | Sentimental ballad |
+| `rock, energetic, electric guitar` | Rock |
+| `jazz, smooth, saxophone` | Jazz |
+| `folk, acoustic, guitar` | Folk |
+| `hip hop, rap, beat` | Hip hop/Rap |
+| `classical, orchestral, strings` | Classical orchestral |
+| `electronic, synth, ambient` | Electronic ambient |
 
-#### 开发 OpenClaw 插件（可选）
+#### Developing OpenClaw Plugins (Optional)
 
-如需深度集成到 OpenClaw，可以开发专用插件：
+For deep integration with OpenClaw, you can develop a dedicated plugin:
 
-1. 创建 `openclaw.plugin.json` 配置文件
-2. 定义 `configSchema` 描述插件参数
-3. 在插件中调用本项目的 HTTP API
+1. Create `openclaw.plugin.json` configuration file
+2. Define `configSchema` to describe plugin parameters
+3. Call this project's HTTP API from the plugin
 
-详见 [OpenClaw 插件文档](https://docs.openclaw.ai/zh-CN/tools)
+See [OpenClaw Plugin Documentation](https://docs.openclaw.ai/en-US/tools)
 
-### 其他 MCP 客户端 (Goose, Continue, Zed 等)
+### Other MCP Clients (Goose, Continue, Zed, etc.)
 
-对于任何支持 MCP 的客户端，使用以下配置格式：
+For any MCP-compatible client, use the following configuration format:
 
 ```json
 {
   "mcpServers": {
     "suno-automation": {
       "command": "node",
-      "args": ["你clone的项目实际路径/src/index.js"],
+      "args": ["your-cloned-project-path/src/index.js"],
       "env": {},
       "disabled": false,
       "autoApprove": []
@@ -912,22 +764,22 @@ curl -X POST http://localhost:3456/download/batch \
 }
 ```
 
-**注意**: 将 `args` 中的路径替换为你的实际安装目录。
+**Note**: Replace the path in `args` with your actual installation directory.
 
-也可以直接复制项目中的 `mcp-settings.json` 文件内容到你的 MCP 客户端配置中。
+You can also directly copy the content from `mcp-settings.json` in the project to your MCP client configuration.
 
-## 目录结构
+## Directory Structure
 
 ```
 suno-automation-server/
 ├── package.json
 ├── config.js
-├── mcp-settings.json    # MCP 配置模板
+├── mcp-settings.json    # MCP config template
 ├── src/
-│   ├── index.js           # 入口
-│   ├── mcp-server.js      # MCP 服务
+│   ├── index.js           # Entry
+│   ├── mcp-server.js      # MCP service
 │   ├── http-server.js     # HTTP API
-│   ├── browser.js         # 浏览器管理
-│   └── suno-automation.js # 核心逻辑
-└── browser-data/          # 登录状态存储
+│   ├── browser.js         # Browser management
+│   └── suno-automation.js # Core logic
+└── browser-data/          # Login state storage
 ```

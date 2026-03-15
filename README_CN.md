@@ -1,9 +1,6 @@
 # Suno Automation Server
 
-[![English](https://img.shields.io/badge/English-English-blue?style=flat-square)](README.md)
-[![中文](https://img.shields.io/badge/中文-Chinese-red?style=flat-square)](README_CN.md)
-[![日本語](https://img.shields.io/badge/日本語-Japanese-green?style=flat-square)](README_JA.md)
-[![한국어](https://img.shields.io/badge/한국어-Korean-yellow?style=flat-square)](README_KO.md)
+[English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md) | [한국어](README_KO.md)
 
 本地自动化服务，用于 Suno AI 音乐生成。支持 MCP 和 HTTP API 两种模式。
 
